@@ -1,0 +1,15 @@
+@import 'variables/variables';
+
+.is-sidebar-menu
+{
+  background: $color--dark-shade;
+  li a {
+    color: $color--light-shades;
+  }
+}
+.nuxt-link-active{
+  background-color: $color--dark-accent;
+}
+.full-width{
+  width:100%;
+}

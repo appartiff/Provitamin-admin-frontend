@@ -1,0 +1,16 @@
+.is-sidebar-menu {
+  background: #262839;
+}
+.is-sidebar-menu li a {
+  color: #F5F5F5;
+}
+
+.nuxt-link-active {
+  background-color: #AA3F52;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/*# sourceMappingURL=main.css.map */
