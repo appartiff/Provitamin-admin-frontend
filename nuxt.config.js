@@ -41,7 +41,12 @@ export default {
     '@nuxtjs/bulma',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/font-awesome'
   ],
+  fontawesome: {
+    icons: {
+    }
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
