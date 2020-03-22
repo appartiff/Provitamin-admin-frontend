@@ -5,7 +5,6 @@ export const state = () => ({
         id: '1',
         sku: '00e8da9d',
         type: 'Vitaminer',
-        asin: 'B000P0J0AQ',
         pricing: 159,
         imageUrl: 'https://s3.images-iherb.com/cro/cro89104/v/3.jpg',
         details: {
@@ -23,7 +22,6 @@ export const state = () => ({
             id: '2',
             sku: '00e8da9d',
             type: 'Vitaminer',
-            asin: 'B000P0J0AQ',
             pricing: 55,
             imageUrl: 'https://s3.images-iherb.com/cen/cen21245/v/5.jpg',
             details: {
@@ -41,7 +39,6 @@ export const state = () => ({
             id: '3',
             sku: '00e8da9d',
             type: 'Vitaminer',
-            asin: 'B000P0J0AQ',
             pricing: 34,
             imageUrl: 'https://s3.images-iherb.com/cen/cen21364/v/5.jpg',
             details: {
