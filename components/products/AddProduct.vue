@@ -1,75 +1,57 @@
 <template>
   <Modal v-if="active" :active="active" @closed="reset">
     <div class="field">
-      <label class="label">Title</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Text input">
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Sku</label>
-      <div class="control">
-        <input class="input is-success" type="text" placeholder="Text input">
-      </div>
+      <InputBox v-model="product.sku" type="text" placeholder="input" label="Sku"></InputBox>
       <p class="help is-success">This sku is available</p>
     </div>
+    <h2 class="title is-3">Details</h2>
     <div class="field">
-      <label class="label">Categories</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="vitaminer/b vitamin">
+      <InputBox v-model="product.details.title" type="text" placeholder="input" label="Title"></InputBox>
     </div>
+    <ProductBrand></ProductBrand>
+    <div class="field">
+      <InputBox v-model="product.details.category" type="text" placeholder="input" label="Categories"></InputBox>
     </div>
     <h2 class="title is-3">Pricing</h2>
     <div class="field is-grouped">
-      <div class="control">
-        <label class="label">Listing Price</label>
-        <input class="input" type="text" placeholder="56">
-      </div>
-      <div class="control">
-        <label class="label">Retail Price</label>
-        <input class="input" type="text" placeholder="56">
-      </div>
+      <InputBox v-model="product.pricing.list"  type="number" placeholder="input" label="Listing Price"></InputBox>
+      <InputBox v-model="product.pricing.retail"  type="number" placeholder="input" label="Retail Price"></InputBox>
       <div class="control">
         <label class="label">discount</label>
-        <span>5%</span>
+        <span>{{calculateDiscountPercentage()}}%</span>
       </div>
     </div>
     <h2 class="title is-3">Shipping</h2>
     <div class="field is-grouped">
-
-      <div class="control">
-        <label class="label">Weight</label>
-        <input class="input" type="text" placeholder="346g">
-      </div>
-      <div class="control">
-        <label class="label">Height</label>
-        <input class="input" type="text" placeholder="56cm">
-      </div>
+      <InputBox v-model="product.shipping.weight"  type="number" placeholder="input" label="Weight"></InputBox>
+      <InputBox v-model="product.shipping.dimensions.height"  type="number" placeholder="input" label="Height"></InputBox>
     </div>
     <div class="field is-grouped">
-      <div class="control">
-        <label class="label">Width</label>
-        <input class="input" type="text" placeholder="35cm">
-      </div>
-      <div class="control">
-        <label class="label">Depth</label>
-        <input class="input" type="text" placeholder="10cm">
-      </div>
+      <InputBox v-model="product.shipping.dimensions.width"  type="number" placeholder="input" label="Width"></InputBox>
+      <InputBox v-model="product.shipping.dimensions.depth"  type="number" placeholder="input" label="Depth"></InputBox>
+    </div>
+    <div class="field">
+      <button class="button is-primary">Insert</button>
     </div>
   </Modal>
 </template>
 
 <script>
   import Modal from '../modals/Modal';
-    export default {
+import InputBox from '../formControls/InputBox';
+import ProductBrand from './AddProduct/ProductBrand';
+import {ProductDto} from '../../entities/products/productDto';
+
+  export default {
         name: "AddProduct",
       components:{
-          Modal
+          Modal,
+        InputBox,
+        ProductBrand
       },
       data() {
         return {
-          product:{}
+          product:ProductDto()
         }
       },
       props:{
@@ -80,8 +62,16 @@
       },
       methods:{
           reset(){
+            this.product = ProductDto();
             this.$emit('reset');
-          }
+          },
+        calculateDiscountPercentage(){
+            let discount = this.product.pricing.list- this.product.pricing.retail;
+             let discountPercentage = parseInt(((discount / this.product.pricing.list) * 100));
+          this.product.pricing.savings = discount;
+             this.product.pricing.pctSavings = discountPercentage;
+            return discountPercentage
+        },
       }
     }
 </script>
