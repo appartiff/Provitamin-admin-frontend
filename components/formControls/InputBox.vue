@@ -1,8 +1,8 @@
 <template>
   <div class="control">
     <label class="label">{{label}}</label>
-    <input v-if="type === 'text'" v-model="content" @input="handleInput" class="input" :type="type" :placeholder="placeholder">
-    <input v-if="type === 'number'" v-model.number="content" @input="handleInput" class="input" :type="type" :placeholder="placeholder">
+    <input v-if="type === 'text'" v-model="content" @input="handleInput" class="input is-small" :type="type" :placeholder="placeholder">
+    <input v-if="type === 'number'" v-model.number="content" @input="handleInput" :class="isNumber(value) ? 'is-danger' : ''" class="input is-small" :type="type" :placeholder="placeholder">
   </div>
 </template>
 
@@ -10,7 +10,7 @@
     export default {
         name: "InputBox",
       props: {
-        value: String,
+        value: [String,Number],
         type: {
           required:true,
           Type: String,
@@ -34,15 +34,15 @@
       methods: {
         handleInput (e) {
           this.$emit('input', this.content)
+        },
+        isNumber(input){
+          return !(/^\d+$/.test(input));
         }
       }
     }
 </script>
 
 <style scoped>
-input {
-  font-size: 0.8rem;
-}
   label {
     font-size: 0.9rem
   }
