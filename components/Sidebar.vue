@@ -8,7 +8,13 @@
     <ul class="menu-list">
       <li><nuxt-link to="/#">Dashboard</nuxt-link></li>
       <li><nuxt-link to="/customers">Customers</nuxt-link></li>
+    </ul>
+    <p class="menu-label">
+      Products
+    </p>
+    <ul class="menu-list">
       <li><nuxt-link to="/products">Products</nuxt-link></li>
+      <li><nuxt-link to="/brands">Brands</nuxt-link></li>
     </ul>
     <p class="menu-label">
       Transactions

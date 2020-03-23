@@ -1,11 +1,14 @@
 <template>
-  <div>
-    <div class="columns is-multiline">
+  <div class="full-width">
     <ProductsNavbar @addProductClicked="isAddProductActive = true" ></ProductsNavbar>
+
+  <div class="column is-main-content">
+    <div class="columns is-multiline">
       <ProductsTable @delete="clickedDelete"></ProductsTable>
       <DeleteProduct :active="isDeleteProductActive" @reset="reset"></DeleteProduct>
       <AddProduct :active="isAddProductActive" @reset="reset"></AddProduct>
     </div>
+  </div>
   </div>
 </template>
 

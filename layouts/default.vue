@@ -1,10 +1,7 @@
 <template>
   <div class="columns is-fullheight">
     <Sidebar></Sidebar>
-    <div class="column is-main-content">
-
     <nuxt />
-    </div>
   </div>
 </template>
 

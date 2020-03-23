@@ -52,6 +52,11 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    proxy: true // Can be also an object with default options
+  },
+  proxy: {
+    '/api/': 'http://api.example.com',
+    '/api2/': 'http://api.another-website.com'
   },
   /*
   ** Build configuration

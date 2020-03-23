@@ -1,8 +1,11 @@
 <template>
-  <div class="field">
-    <label class="label">Brand</label>
-    <SelectionBox :collection="brands"></SelectionBox>
+  <div>
+    <div class="field">
+      <label class="label">Brand</label>
+      <SelectionBox :collection="brands"></SelectionBox>
+    </div>
   </div>
+
 </template>
 
 <script>

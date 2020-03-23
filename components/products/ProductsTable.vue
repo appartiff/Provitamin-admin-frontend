@@ -1,5 +1,5 @@
 <template>
-  <table class="table column is-full">
+  <table class="table column">
     <thead>
     <tr>
       <th>Sku</th>

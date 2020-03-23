@@ -3,7 +3,6 @@
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
       </div>
-
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
@@ -26,12 +25,7 @@
 <style lang="scss" scoped>
   @import '~/assets/variables/_variables.scss';
 
-  nav{
-    background: $color--dark-shade-lighter;
-  }
-  a {
-    color: $color--light-shades;
-  }
+
   .navbar-dropdown {
     background: $color--light-shades;
   }
