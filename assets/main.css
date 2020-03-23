@@ -13,4 +13,12 @@
   width: 100%;
 }
 
+nav {
+  background: #50546D !important;
+}
+
+nav a {
+  color: #F5F5F5 !important;
+}
+
 /*# sourceMappingURL=main.css.map */
