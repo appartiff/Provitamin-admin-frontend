@@ -21,7 +21,7 @@
       },
       methods:{
         onChange(event) {
-          this.$emit('selected',event.target.value);
+          this.$emit('selected',this.collection[event.target.selectedIndex]);
           this.$emit('selectedIndex',event.target.selectedIndex)
         }
       }

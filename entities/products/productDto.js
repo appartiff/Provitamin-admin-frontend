@@ -1,22 +1,19 @@
 export function ProductDto() {
   return {
     sku: '',
-    category:{
-      slug:'',
-      tags:[],
-      category:'',
-    },
     details: {
       title: '',
       brand: '',
+      category: '',
+      imageUrl: '',
     },
     pricing: {
       list: null,
-      retail:null,
-      savings:null,
-      pctSavings:null
+      retail: null,
+      savings: null,
+      pctSavings: null
     },
-    shipping:{
+    shipping: {
       weight: null,
       dimensions: {
         height: null,

@@ -1,11 +1,11 @@
 <template>
   <Modal v-if="active" :active="active" @closed="reset">
-    <DeleteConfirmation title="Do you want to delete:" :text="selectedProduct.details.title" @yes="yesClicked" @canceled="$emit('reset')"></DeleteConfirmation>
+    <DeleteConfirmation title="Do you want to delete:" :text="product.details.title" @yes="yesClicked" @canceled="$emit('reset')"></DeleteConfirmation>
   </Modal>
 </template>
 <script>
   import Modal from '../modals/Modal';
-  import { mapMutations,mapState } from 'vuex';
+  import { mapState,mapActions } from 'vuex';
   import DeleteConfirmation from '../modals/modal/YesCancel';
     export default {
         name: "DeleteProduct",
@@ -18,18 +18,20 @@
             default:false,
             type:Boolean
           },
+        product:{
+            type:Object,
+          required:true
+        }
       },
       computed:{
-          ...mapState
-          ('products', ['selectedProduct'])
 
       },
       methods:{
-        ...mapMutations({
+        ...mapActions({
           deleteProduct: 'products/deleteProduct'
         }),
         yesClicked(){
-          this.deleteProduct(this.selectedProduct);
+          this.deleteProduct(this.product);
           this.reset();
         },
         reset(){

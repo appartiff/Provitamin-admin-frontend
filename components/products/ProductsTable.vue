@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="is-size-6" v-for="product in products">
+    <tr class="is-size-6" v-for="(product, index) in products" :key="product.id">
       <th>
         {{product.sku}}
       </th>
@@ -30,9 +30,10 @@
         </button>
       </td>
       <td>
-        <button @click="deleteClicked(product)" class="button is-danger">
+        <button @click="showDeleteModal = index" class="button is-danger">
           Delete
         </button>
+        <DeleteProduct :product="product" :active="showDeleteModal === index"  @reset="reset"></DeleteProduct>
       </td>
     </tr>
     </tbody>
@@ -40,26 +41,30 @@
 </template>
 
 <script>
+  import DeleteProduct from './DeleteProduct';
   import { mapState,mapMutations } from 'vuex';
     export default {
         name: "ProductsTable",
       computed: {
-        ...mapState({
-          products: state => state.products.products
-        })
+        ...mapState
+        ('products', ['products'])
+      },
+      components:{
+        DeleteProduct
+      },
+      data() {
+        return {
+          showDeleteModal:-1,
+          showEditModal:-1,
+        }
       },
       methods:{
-          ...mapMutations({
-            selectProduct: 'products/selectProduct'
-          }),
           editClicked(product){
-            this.selectProduct(product);
+           // this.selectProduct(product);
             this.$emit('edit')
-
           },
-        deleteClicked(product){
-          this.selectProduct(product);
-          this.$emit('delete')
+        reset(){
+          this.showDeleteModal = -1;
         }
       }
     }

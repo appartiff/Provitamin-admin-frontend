@@ -4,8 +4,7 @@
 
   <div class="column is-main-content">
     <div class="columns is-multiline">
-      <ProductsTable @delete="clickedDelete"></ProductsTable>
-      <DeleteProduct :active="isDeleteProductActive" @reset="reset"></DeleteProduct>
+      <ProductsTable></ProductsTable>
       <AddProduct :active="isAddProductActive" @reset="reset"></AddProduct>
     </div>
   </div>
@@ -15,32 +14,32 @@
 <script>
   import ProductsNavbar from '../../components/products/ProductsNavbar';
   import ProductsTable from '../../components/products/ProductsTable';
-  import DeleteProduct from '../../components/products/DeleteProduct';
   import AddProduct from '../../components/products/AddProduct';
+  import {mapActions} from 'vuex';
     export default {
         name: "index",
       components: {
         ProductsTable,
           ProductsNavbar,
-        DeleteProduct,
         AddProduct
       },
       data() {
         return {
-          isDeleteProductActive : false,
           isAddProductActive : false,
         }
       },
-      methods:{
-          clickedDelete(data){
-            this.isDeleteProductActive = true;
-          },
-        reset(){
-          this.isDeleteProductActive = false;
-          this.isAddProductActive =false;
 
+      methods:{
+          ...mapActions({
+            getProducts:'products/getProducts',
+          }),
+        reset(){
+          this.isAddProductActive =false;
         }
-      }
+      },
+      mounted(){
+        this.getProducts();
+      },
     }
 </script>
 

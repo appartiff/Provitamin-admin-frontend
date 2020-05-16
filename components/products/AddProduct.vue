@@ -2,7 +2,7 @@
   <Modal v-if="active" :active="active" @closed="reset">
     <h2 class="title is-3">Sku</h2>
     <div class="field is-grouped">
-      <InputBox v-model="sku" type="text" placeholder="VGC-fdf-44e" label="Sku"></InputBox>
+      <InputBox v-model="product.sku" type="text" placeholder="VGC-fdf-44e" label="Sku"></InputBox>
     </div>
     <div class="field">
       <p class="help is-success">This sku is available</p>
@@ -10,7 +10,7 @@
     <h2 class="title is-3">Details</h2>
     <div class="control">
       <label class="label">Brand</label>
-      <SelectionBox @selectedIndex="updateBrand" :collection="brands.map(x=>x.title)"></SelectionBox>
+      <SelectionBox @selected="updateBrand" :collection="brands.map(x=>x.title)"></SelectionBox>
     </div>
     <div class="field">
       <InputBox v-model="product.details.title" type="text" placeholder="input" label="Title"></InputBox>
@@ -37,7 +37,7 @@
       <InputBox v-model="product.shipping.dimensions.depth"  type="number" placeholder="input" label="Depth"></InputBox>
     </div>
     <div class="field">
-      <button class="button is-primary">Insert</button>
+      <button @click="addProduct" class="button is-primary">Insert</button>
     </div>
   </Modal>
 </template>
@@ -48,7 +48,7 @@ import InputBox from '../formControls/InputBox';
 import SelectionBox from '../formControls/SelectionBox';
 import ProductBrand from './AddProduct/ProductBrand';
 import {ProductDto} from '../../entities/products/productDto';
-import {mapState} from 'vuex';
+import {mapState,mapActions} from 'vuex';
   export default {
         name: "AddProduct",
       components:{
@@ -60,7 +60,6 @@ import {mapState} from 'vuex';
       data() {
         return {
           product:ProductDto(),
-          sku: '',
         }
       },
     computed:{
@@ -74,12 +73,19 @@ import {mapState} from 'vuex';
         }
       },
       methods:{
+        ...mapActions({
+          insertProduct:'products/insertProduct',
+        }),
           reset(){
             this.product = ProductDto();
             this.$emit('reset');
           },
         updateBrand(index){
-            this.brand = this.brands[index].shortCode;
+            this.product.details.brand = index;
+        },
+        addProduct(){
+          this.insertProduct(this.product);
+          this.$emit('reset');
         },
         calculateDiscountPercentage(){
              let discount = this.product.pricing.list- this.product.pricing.retail;
