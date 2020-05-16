@@ -1,7 +1,6 @@
 <template>
   <div class="select is-small">
-    <select   v-model="selected">
-      <option selected="selected"> Select dropdown</option>
+    <select  @change="onChange">
       <option v-for="(item,index) in collection" :key="index">{{item}}</option>
     </select>
   </div>
@@ -18,7 +17,12 @@
       },
       data() {
         return {
-          selected:null
+        }
+      },
+      methods:{
+        onChange(event) {
+          this.$emit('selected',event.target.value);
+          this.$emit('selectedIndex',event.target.selectedIndex)
         }
       }
     }

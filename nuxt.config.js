@@ -52,11 +52,11 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    proxy: true // Can be also an object with default options
+    proxy: false, // Can be also an object with default options,
+    baseURL:"http://localhost:5001"
   },
   proxy: {
-    '/api/': 'http://api.example.com',
-    '/api2/': 'http://api.another-website.com'
+    '/api/': { target: 'http://localhost:5001', changeOrigin: true },
   },
   /*
   ** Build configuration

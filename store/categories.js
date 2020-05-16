@@ -1,16 +1,16 @@
 export const state = () => ({
-  brands: [
-   ],
+  categories: [
+  ],
 });
 
 export const mutations = {
-  setBrands(state,payload){
-    state.brands = payload;
+  setCategories(state,payload){
+    state.categories = payload;
   },
 };
 export const actions = {
-  insertBrand ({ commit,dispatch }, brand) {
-    this.$axios.post('/api/brands/create', {
+  insertCategory ({ commit,dispatch }, brand) {
+    this.$axios.post('/api/categories/create', {
       title: brand
     })
       .then(function (response) {
@@ -20,9 +20,9 @@ export const actions = {
         console.log(error);
       });
   },
-  deleteBrand ({ commit,dispatch }, brand) {
-    this.$axios.delete('/api/brands/delete', {
-    data: {title: brand.title}
+  deleteCategory ({ commit,dispatch }, brand) {
+    this.$axios.delete('/api/categories/delete', {
+      data: {title: brand.title}
     })
       .then(function (response) {
         dispatch('getBrands');
@@ -31,10 +31,10 @@ export const actions = {
         console.log(error);
       });
   },
-  getBrands({commit}) {
-    this.$axios.$get('/api/brands/get')
+  getCategory({commit}) {
+    this.$axios.$get('/api/categories/get')
       .then(function (response) {
-        commit('setBrands',response);
+        commit('setCategories',response);
       })
       .catch(function (error) {
         console.log(error);
@@ -42,7 +42,7 @@ export const actions = {
   },
 };
 export const  getters ={
-  brandExists: (state) => (title) => {
-  return state.brands.some(todo => todo.title === title);
-}
+  categoryExists: (state) => (title) => {
+    return state.brands.some(todo => todo.title === title);
+  }
 };

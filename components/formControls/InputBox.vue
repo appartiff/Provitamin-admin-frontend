@@ -1,7 +1,7 @@
 <template>
-  <div class="control">
+  <div class="control is-expanded">
     <label class="label">{{label}}</label>
-    <input v-if="type === 'text'" v-model="content" @input="handleInput" class="input is-small" :type="type" :placeholder="placeholder">
+    <input v-if="type === 'text'" v-model="content" @input="handleInput" class="input is-small" :class="{upperCase :'is-uppercase'}" :type="type" :placeholder="placeholder">
     <input v-if="type === 'number'" v-model.number="content" @input="handleInput" :class="isNumber(value) ? 'is-danger' : ''" class="input is-small" :type="type" :placeholder="placeholder">
   </div>
 </template>
@@ -24,7 +24,7 @@
           Type: String
         },
         placeholder: String,
-
+        upperCase:Boolean,
       },
       data () {
         return {

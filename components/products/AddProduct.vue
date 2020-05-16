@@ -1,14 +1,20 @@
 <template>
   <Modal v-if="active" :active="active" @closed="reset">
+    <h2 class="title is-3">Sku</h2>
+    <div class="field is-grouped">
+      <InputBox v-model="sku" type="text" placeholder="VGC-fdf-44e" label="Sku"></InputBox>
+    </div>
     <div class="field">
-      <InputBox v-model="product.sku" type="text" placeholder="input" label="Sku"></InputBox>
       <p class="help is-success">This sku is available</p>
     </div>
     <h2 class="title is-3">Details</h2>
+    <div class="control">
+      <label class="label">Brand</label>
+      <SelectionBox @selectedIndex="updateBrand" :collection="brands.map(x=>x.title)"></SelectionBox>
+    </div>
     <div class="field">
       <InputBox v-model="product.details.title" type="text" placeholder="input" label="Title"></InputBox>
     </div>
-    <ProductBrand></ProductBrand>
     <div class="field">
       <InputBox v-model="product.details.category" type="text" placeholder="input" label="Categories"></InputBox>
     </div>
@@ -39,21 +45,28 @@
 <script>
   import Modal from '../modals/Modal';
 import InputBox from '../formControls/InputBox';
+import SelectionBox from '../formControls/SelectionBox';
 import ProductBrand from './AddProduct/ProductBrand';
 import {ProductDto} from '../../entities/products/productDto';
-
+import {mapState} from 'vuex';
   export default {
         name: "AddProduct",
       components:{
           Modal,
         InputBox,
-        ProductBrand
+        ProductBrand,
+        SelectionBox
       },
       data() {
         return {
-          product:ProductDto()
+          product:ProductDto(),
+          sku: '',
         }
       },
+    computed:{
+      ...mapState
+      ('brands', ['brands']),
+    },
       props:{
         active : {
           default:false,
@@ -65,8 +78,11 @@ import {ProductDto} from '../../entities/products/productDto';
             this.product = ProductDto();
             this.$emit('reset');
           },
+        updateBrand(index){
+            this.brand = this.brands[index].shortCode;
+        },
         calculateDiscountPercentage(){
-            let discount = this.product.pricing.list- this.product.pricing.retail;
+             let discount = this.product.pricing.list- this.product.pricing.retail;
              let discountPercentage = parseInt(((discount / this.product.pricing.list) * 100));
           this.product.pricing.savings = discount;
              this.product.pricing.pctSavings = discountPercentage;

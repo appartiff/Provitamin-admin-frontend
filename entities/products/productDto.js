@@ -1,10 +1,14 @@
 export function ProductDto() {
   return {
     sku: '',
+    category:{
+      slug:'',
+      tags:[],
+      category:'',
+    },
     details: {
       title: '',
       brand: '',
-      category:'',
     },
     pricing: {
       list: null,

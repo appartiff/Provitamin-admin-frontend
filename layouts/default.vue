@@ -2,15 +2,27 @@
   <div class="columns is-fullheight">
     <Sidebar></Sidebar>
     <nuxt />
+    <StoreWatch></StoreWatch>
   </div>
 </template>
 
 <script>
+  import {mapState, mapMutations,mapGetters,mapActions} from 'vuex';
   import Sidebar from '../components/Sidebar';
+  import StoreWatch from '../components/StoreWatch';
   export default {
     components:{
-      Sidebar
-    }
+      Sidebar,
+      StoreWatch
+    },
+    methods:{
+      ...mapActions({
+        getBrands: 'brands/getBrands',
+      })
+    },
+    mounted(){
+      this.getBrands();
+    },
   }
 </script>
 <style>
